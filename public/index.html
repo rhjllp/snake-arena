@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta name="theme-color" content="#101827">
+  <title>Snake Arena</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div><div class="eyebrow">ARCADE • ONLINE</div><h1>🐍 Snake Arena</h1></div>
+      <div class="online"><span class="dot"></span><span id="onlineCount">0</span> online</div>
+    </header>
+
+    <section id="authPanel" class="panel auth">
+      <h2>Chào mừng đến Snake Arena</h2>
+      <p class="muted">Đăng nhập hoặc tạo tài khoản để lưu điểm cao.</p>
+      <label>Tên tài khoản</label><input id="username" autocomplete="username" maxlength="16" placeholder="vd: player123">
+      <label>Mật khẩu</label><input id="password" type="password" autocomplete="current-password" placeholder="Ít nhất 8 ký tự">
+      <div class="actions">
+        <button id="loginBtn">Đăng nhập</button><button id="registerBtn" class="secondary">Đăng ký</button>
+      </div>
+      <p id="authMessage" class="message"></p>
+    </section>
+
+    <section id="gamePanel" hidden>
+      <div class="welcome panel">
+        <div>Xin chào, <b id="playerName"></b><small id="roleLabel">Người chơi</small></div>
+        <div class="actions compact"><button id="adminBtn" class="secondary" hidden>Admin</button><button id="logoutBtn" class="secondary">Đăng xuất</button></div>
+      </div>
+      <div class="stats">
+        <div class="stat panel"><small>ĐIỂM HIỆN TẠI</small><b id="score">0</b></div>
+        <div class="stat panel"><small>KỶ LỤC CỦA BẠN</small><b id="bestScore">0</b></div>
+      </div>
+      <section class="panel gamebox">
+        <div class="gamehead"><div><h2>Đấu trường rắn</h2><p class="muted">Ăn mồi, tránh đâm vào tường và chính mình.</p></div><button id="startBtn">Chơi mới</button></div>
+        <canvas id="board" width="400" height="400" aria-label="Bàn chơi rắn"></canvas>
+        <div class="controls">
+          <button data-dir="up" aria-label="Lên">▲</button>
+          <div><button data-dir="left" aria-label="Trái">◀</button><button data-dir="down" aria-label="Xuống">▼</button><button data-dir="right" aria-label="Phải">▶</button></div>
+        </div>
+        <p id="gameMessage" class="message">Nhấn “Chơi mới” để bắt đầu.</p>
+      </section>
+      <section class="panel">
+        <h2>🏆 Bảng xếp hạng</h2><ol id="leaderboard" class="leaderboard"><li>Đang tải...</li></ol>
+      </section>
+    </section>
+
+    <section id="adminPanel" class="panel" hidden>
+      <div class="gamehead"><div><div class="eyebrow">CONTROL CENTER</div><h2>🛡️ Bảng quản trị</h2></div><button id="closeAdmin" class="secondary">Đóng</button></div>
+      <div class="stats">
+        <div class="stat panel"><small>TỔNG TÀI KHOẢN</small><b id="totalUsers">0</b></div>
+        <div class="stat panel"><small>ĐANG ONLINE</small><b id="adminOnline">0</b></div>
+      </div>
+      <div class="tablewrap"><table><thead><tr><th>Người chơi</th><th>Điểm</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody id="userRows"></tbody></table></div>
+      <p class="muted tiny">Admin có thể khóa/mở khóa tài khoản. Không thể khóa tài khoản admin.</p>
+    </section>
+    <footer>Snake Arena • Bản thử nghiệm</footer>
+  </main>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/game.js"></script>
+</body>
+</html>
